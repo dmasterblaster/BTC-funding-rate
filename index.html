@@ -8,27 +8,20 @@
   <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #ffffff;
-      color: #111;
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:#ffffff;
+      color:#111;
     }
-    #wrap {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    #chart {
-      flex: 1;
-      width: 100%;
-    }
-    #status {
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #555;
-      border-top: 1px solid #eee;
+    #wrap{width:100vw;height:100vh;display:flex;flex-direction:column;}
+    #chart{flex:1;width:100%;}
+    #status{
+      padding:10px 14px;
+      font-size:13px;
+      color:#555;
+      border-top:1px solid #eee;
+      white-space:pre-wrap;
     }
   </style>
 </head>
@@ -39,47 +32,85 @@
   </div>
 
 <script>
-function num(x) {
+function toNum(x){
   const n = Number(x);
   return Number.isFinite(n) ? n : null;
 }
 
-async function loadChart() {
+function pick(obj, keys){
+  for (const k of keys){
+    if (obj && Object.prototype.hasOwnProperty.call(obj, k)) return obj[k];
+  }
+  return undefined;
+}
+
+async function loadChart(){
   const status = document.getElementById("status");
 
-  try {
-    // IMPORTANT: no leading slash on GitHub Pages project sites
-    const response = await fetch("data/fr-average.json", { cache: "no-store" });
-    if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+  try{
+    // IMPORTANT: no leading slash for GitHub Pages project sites
+    const res = await fetch("data/fr-average.json", { cache: "no-store" });
+    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
 
-    const rows = await response.json();
-    if (!Array.isArray(rows) || rows.length === 0) throw new Error("No valid data loaded");
+    const rows = await res.json();
+    if (!Array.isArray(rows) || rows.length === 0) throw new Error("JSON is empty or not an array.");
+
+    const sample = rows[0] || {};
+    const keys = Object.keys(sample);
+
+    // Support both schemas:
+    // New: date + funding_rate + price
+    // Old: date + value (maybe also Price)
+    const fundingKeys = ["funding_rate", "fundingRate", "funding", "fr", "value"];
+    const priceKeys = ["price", "Price", "btc_price", "price_usd", "usd_price"];
 
     const dates = [];
     const fr = [];
     const price = [];
 
-    for (const r of rows) {
-      if (!r) continue;
-      const d = r.date;
-      const f = num(r.funding_rate);
-      const p = num(r.price);
+    let frCount = 0;
+    let priceCount = 0;
+
+    for (const r of rows){
+      const d = pick(r, ["date", "Date"]);
+      const fRaw = pick(r, fundingKeys);
+      const pRaw = pick(r, priceKeys);
+
+      const f = toNum(fRaw);
+      const p = toNum(pRaw);
 
       if (!d || f === null) continue;
 
-      dates.push(d);
+      dates.push(String(d));
       fr.push(f);
       price.push(p);
+
+      frCount++;
+      if (p !== null) priceCount++;
     }
 
-    if (dates.length === 0) throw new Error("No valid datapoints after parsing");
+    if (dates.length === 0){
+      throw new Error(
+        "No valid datapoints after parsing.\n" +
+        "This usually means the funding key name is different than expected.\n" +
+        "First row keys: " + keys.join(", ")
+      );
+    }
 
-    // Color bars green if >= 0 else red
-    const barColors = fr.map(v => (v >= 0 ? "#1a7f37" : "#cf222e"));
+    // If your funding values are already in percent units (example 0.73 means 0.73%),
+    // you want decimals for Plotly percent formatting (0.0073). We can auto-fix:
+    // If median abs funding is > 0.5, assume it's percent units and divide by 100.
+    const absVals = fr.map(v => Math.abs(v)).filter(v => Number.isFinite(v)).sort((a,b)=>a-b);
+    const medianAbs = absVals.length ? absVals[Math.floor(absVals.length/2)] : 0;
+    const needsDivideBy100 = medianAbs > 0.5; // heuristic
+
+    const frFixed = needsDivideBy100 ? fr.map(v => v / 100) : fr;
+
+    const barColors = frFixed.map(v => (v >= 0 ? "#1a7f37" : "#cf222e"));
 
     const fundingBars = {
       x: dates,
-      y: fr,
+      y: frFixed,
       type: "bar",
       name: "Funding Rate",
       marker: { color: barColors },
@@ -87,20 +118,25 @@ async function loadChart() {
       hovertemplate: "Funding: %{y:.4%}<br>%{x}<extra></extra>"
     };
 
-    const priceLine = {
-      x: dates,
-      y: price,
-      type: "scatter",
-      mode: "lines",
-      name: "BTC Price (USD)",
-      yaxis: "y2",
-      line: { width: 2, color: "#111111" },
-      connectgaps: true,
-      hovertemplate: "Price: $%{y:,.0f}<br>%{x}<extra></extra>"
-    };
+    const traces = [fundingBars];
+
+    // Only add price line if we actually have price data
+    if (priceCount > 0){
+      traces.push({
+        x: dates,
+        y: price,
+        type: "scatter",
+        mode: "lines",
+        name: "BTC Price (USD)",
+        yaxis: "y2",
+        line: { width: 2, color: "#111111" },
+        connectgaps: true,
+        hovertemplate: "Price: $%{y:,.0f}<br>%{x}<extra></extra>"
+      });
+    }
 
     const layout = {
-      title: { text: "Bitcoin Funding Rates (USD, Average)", x: 0.02, xanchor: "left" },
+      title: { text: "Bitcoin Funding Rate (Average)", x: 0.02, xanchor: "left" },
       bargap: 0.05,
       paper_bgcolor: "#ffffff",
       plot_bgcolor: "#ffffff",
@@ -125,3 +161,36 @@ async function loadChart() {
       yaxis2: {
         title: "Price (USD)",
         overlaying: "y",
+        side: "right",
+        type: "log",
+        tickprefix: "$",
+        tickformat: ",",
+        showgrid: false,
+        tickfont: { color: "#111111" },
+        titlefont: { color: "#111111" }
+      },
+      legend: { orientation: "h", x: 0.02, y: 1.05 }
+    };
+
+    Plotly.newPlot("chart", traces, layout, { responsive: true, displaylogo: false });
+
+    const last = dates[dates.length - 1];
+    status.textContent =
+      `Loaded ${dates.length.toLocaleString()} points · Last: ${last}\n` +
+      `First row keys: ${keys.join(", ")}\n` +
+      `Funding key used: one of [${fundingKeys.join(", ")}]\n` +
+      `Price found: ${priceCount > 0 ? "yes" : "no"}\n` +
+      `Funding auto-scale: ${needsDivideBy100 ? "divided by 100 (values looked like percent units)" : "no change"}`;
+
+  }catch(err){
+    console.error(err);
+    document.getElementById("chart").innerHTML =
+      "<p style='color:#cf222e;padding:20px;'>Error loading chart data. Open DevTools Console for details.</p>";
+    status.textContent = String(err && err.message ? err.message : err);
+  }
+}
+
+loadChart();
+</script>
+</body>
+</html>
