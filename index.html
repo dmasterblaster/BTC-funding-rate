@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bitcoin Funding Rate (Average)</title>
+
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+    }
+    #chart {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+<div id="chart"></div>
+
+<script>
+async function loadChart() {
+  try {
+    const response = await fetch("data/fr-average.json", { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(`Fetch failed: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error("No valid data loaded");
+    }
+
+    const dates = data.map(d => d.date);
+    const values = data.map(d => d.value);
+
+    const trace = {
+      x: dates,
+      y: values,
+      type: "scatter",
+      mode: "lines",
+      line: {
+        width: 2
+      },
+      hovertemplate: "%{y}<br>%{x}<extra></extra>"
+    };
+
+    const layout = {
+      title: {
+        text: "Bitcoin Funding Rate (Average)",
+        font: { size: 22, color: "#111111" }
+      },
+      xaxis: {
+        title: "Date",
+        showgrid: false,
+        tickfont: { color: "#111111" },
+        titlefont: { color: "#111111" }
+      },
+      yaxis: {
+        title: "Funding Rate",
+        showgrid: true,
+        gridcolor: "#e6e6e6",
+        tickfont: { color: "#111111" },
+        titlefont: { color: "#111111" }
+      },
+      plot_bgcolor: "#ffffff",
+      paper_bgcolor: "#ffffff",
+      margin: { l: 80, r: 30, t: 70, b: 60 }
+    };
+
+    Plotly.newPlot("chart", [trace], layout, {
+      responsive: true,
+      displaylogo: false
+    });
+
+  } catch (err) {
+    document.getElementById("chart").innerHTML =
+      "<p style='color:red;padding:20px;'>Error loading chart data</p>";
+    console.error(err);
+  }
+}
+
+loadChart();
+</script>
+
+</body>
+</html>
