@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bitcoin Funding Rate (Average)</title>
 
   <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
@@ -10,84 +11,117 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #ffffff;
+      background: #ffffff;
+      color: #111;
     }
-    #chart {
+    #wrap {
       width: 100vw;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    #chart {
+      flex: 1;
+      width: 100%;
+    }
+    #status {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #555;
+      border-top: 1px solid #eee;
     }
   </style>
 </head>
 <body>
-
-<div id="chart"></div>
+  <div id="wrap">
+    <div id="chart"></div>
+    <div id="status">Loading…</div>
+  </div>
 
 <script>
+function num(x) {
+  const n = Number(x);
+  return Number.isFinite(n) ? n : null;
+}
+
 async function loadChart() {
+  const status = document.getElementById("status");
+
   try {
+    // IMPORTANT: no leading slash on GitHub Pages project sites
     const response = await fetch("data/fr-average.json", { cache: "no-store" });
+    if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
 
-    if (!response.ok) {
-      throw new Error(`Fetch failed: ${response.status} ${response.statusText}`);
+    const rows = await response.json();
+    if (!Array.isArray(rows) || rows.length === 0) throw new Error("No valid data loaded");
+
+    const dates = [];
+    const fr = [];
+    const price = [];
+
+    for (const r of rows) {
+      if (!r) continue;
+      const d = r.date;
+      const f = num(r.funding_rate);
+      const p = num(r.price);
+
+      if (!d || f === null) continue;
+
+      dates.push(d);
+      fr.push(f);
+      price.push(p);
     }
 
-    const data = await response.json();
+    if (dates.length === 0) throw new Error("No valid datapoints after parsing");
 
-    if (!Array.isArray(data) || data.length === 0) {
-      throw new Error("No valid data loaded");
-    }
+    // Color bars green if >= 0 else red
+    const barColors = fr.map(v => (v >= 0 ? "#1a7f37" : "#cf222e"));
 
-    const dates = data.map(d => d.date);
-    const values = data.map(d => d.value);
-
-    const trace = {
+    const fundingBars = {
       x: dates,
-      y: values,
+      y: fr,
+      type: "bar",
+      name: "Funding Rate",
+      marker: { color: barColors },
+      yaxis: "y",
+      hovertemplate: "Funding: %{y:.4%}<br>%{x}<extra></extra>"
+    };
+
+    const priceLine = {
+      x: dates,
+      y: price,
       type: "scatter",
       mode: "lines",
-      line: {
-        width: 2
-      },
-      hovertemplate: "%{y}<br>%{x}<extra></extra>"
+      name: "BTC Price (USD)",
+      yaxis: "y2",
+      line: { width: 2, color: "#111111" },
+      connectgaps: true,
+      hovertemplate: "Price: $%{y:,.0f}<br>%{x}<extra></extra>"
     };
 
     const layout = {
-      title: {
-        text: "Bitcoin Funding Rate (Average)",
-        font: { size: 22, color: "#111111" }
-      },
+      title: { text: "Bitcoin Funding Rates (USD, Average)", x: 0.02, xanchor: "left" },
+      bargap: 0.05,
+      paper_bgcolor: "#ffffff",
+      plot_bgcolor: "#ffffff",
+      margin: { l: 80, r: 80, t: 70, b: 60 },
       xaxis: {
         title: "Date",
+        type: "date",
         showgrid: false,
         tickfont: { color: "#111111" },
         titlefont: { color: "#111111" }
       },
       yaxis: {
         title: "Funding Rate",
+        tickformat: ".2%",
+        zeroline: true,
+        zerolinecolor: "#ddd",
         showgrid: true,
-        gridcolor: "#e6e6e6",
+        gridcolor: "#eee",
         tickfont: { color: "#111111" },
         titlefont: { color: "#111111" }
       },
-      plot_bgcolor: "#ffffff",
-      paper_bgcolor: "#ffffff",
-      margin: { l: 80, r: 30, t: 70, b: 60 }
-    };
-
-    Plotly.newPlot("chart", [trace], layout, {
-      responsive: true,
-      displaylogo: false
-    });
-
-  } catch (err) {
-    document.getElementById("chart").innerHTML =
-      "<p style='color:red;padding:20px;'>Error loading chart data</p>";
-    console.error(err);
-  }
-}
-
-loadChart();
-</script>
-
-</body>
-</html>
+      yaxis2: {
+        title: "Price (USD)",
+        overlaying: "y",
