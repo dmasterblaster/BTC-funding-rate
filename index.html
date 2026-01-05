@@ -176,11 +176,7 @@ async function loadChart(){
 
     const last = dates[dates.length - 1];
     status.textContent =
-      `Loaded ${dates.length.toLocaleString()} points · Last: ${last}\n` +
-      `First row keys: ${keys.join(", ")}\n` +
-      `Funding key used: one of [${fundingKeys.join(", ")}]\n` +
-      `Price found: ${priceCount > 0 ? "yes" : "no"}\n` +
-      `Funding auto-scale: ${needsDivideBy100 ? "divided by 100 (values looked like percent units)" : "no change"}`;
+  `Loaded ${dates.length.toLocaleString()} points · Last: ${last}`;
 
   }catch(err){
     console.error(err);
