@@ -120,11 +120,13 @@ async function loadChart(){
       bargap: 0.05,
       paper_bgcolor: "#ffffff",
       plot_bgcolor: "#ffffff",
-      margin: { l: 80, r: 80, t: 30, b: 60 },
+      margin: { l: 80, r: 80, t: 40, b: 60 },
+
       xaxis: {
         type: "date",
         showgrid: false
       },
+
       yaxis: {
         title: "Funding Rate",
         tickformat: ".2%",
@@ -133,6 +135,7 @@ async function loadChart(){
         showgrid: true,
         gridcolor: "#eee"
       },
+
       yaxis2: {
         title: "Price (USD)",
         overlaying: "y",
@@ -142,11 +145,48 @@ async function loadChart(){
         tickformat: ",",
         showgrid: false
       },
+
       legend: {
         orientation: "h",
         x: 0.02,
-        y: 1.02
-      }
+        y: 1.08
+      },
+
+      /* 🔹 CENTER WATERMARK */
+      images: [
+        {
+          source: "assets/tbl-logo.png",
+          xref: "paper",
+          yref: "paper",
+          x: 0.5,
+          y: 0.5,
+          sizex: 0.6,
+          sizey: 0.6,
+          xanchor: "center",
+          yanchor: "middle",
+          opacity: 0.06,
+          layer: "below"
+        }
+      ],
+
+      /* 🔹 BRAND LABEL */
+      annotations: [
+        {
+          xref: "paper",
+          yref: "paper",
+          x: 0.02,
+          y: 0.98,
+          xanchor: "left",
+          yanchor: "top",
+          text: "Charts by: @TheBitcoinLayer",
+          showarrow: false,
+          font: { size: 14, color: "#111" },
+          bgcolor: "rgba(255,255,255,0.7)",
+          bordercolor: "rgba(0,0,0,0.15)",
+          borderwidth: 1,
+          borderpad: 6
+        }
+      ]
     };
 
     Plotly.newPlot("chart", traces, layout, {
