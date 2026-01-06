@@ -46,7 +46,6 @@ function pick(obj, keys){
 
 async function loadChart(){
   try{
-    // IMPORTANT: relative path for GitHub Pages project sites
     const res = await fetch("data/fr-average.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
 
@@ -54,6 +53,15 @@ async function loadChart(){
     if (!Array.isArray(rows) || rows.length === 0){
       throw new Error("JSON is empty or not an array.");
     }
+
+    // ---- Trailing 3 years only ----
+    const cutoff = new Date();
+    cutoff.setFullYear(cutoff.getFullYear() - 3);
+
+    const filtered = rows.filter(r => {
+      const d = new Date(pick(r, ["date", "Date"]));
+      return Number.isFinite(d.getTime()) && d >= cutoff;
+    });
 
     const fundingKeys = ["funding_rate", "fundingRate", "funding", "fr", "value"];
     const priceKeys   = ["price", "Price", "btc_price", "price_usd", "usd_price"];
@@ -64,7 +72,7 @@ async function loadChart(){
 
     let priceCount = 0;
 
-    for (const r of rows){
+    for (const r of filtered){
       const d = pick(r, ["date", "Date"]);
       const fRaw = pick(r, fundingKeys);
       const pRaw = pick(r, priceKeys);
@@ -152,7 +160,6 @@ async function loadChart(){
         y: 1.08
       },
 
-      /* 🔹 CENTER WATERMARK */
       images: [
         {
           source: "assets/tbl-logo.png",
@@ -169,12 +176,11 @@ async function loadChart(){
         }
       ],
 
-      /* 🔹 BRAND LABEL */
       annotations: [
         {
           xref: "paper",
           yref: "paper",
-          x: 0.02,
+          x: 0.04,
           y: 0.94,
           xanchor: "left",
           yanchor: "top",
