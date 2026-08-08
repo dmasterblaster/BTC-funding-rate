@@ -7242,12 +7242,12 @@
   {
     "date": "2026-05-09",
     "funding_rate": 1.9e-05,
-    "price": 80678.0
+    "price": 80686.0
   },
   {
     "date": "2026-05-10",
     "funding_rate": 1.1e-05,
-    "price": 82146.0
+    "price": 82147.0
   },
   {
     "date": "2026-05-11",
@@ -7257,67 +7257,67 @@
   {
     "date": "2026-05-12",
     "funding_rate": -6e-06,
-    "price": 80481.0
+    "price": 80482.0
   },
   {
     "date": "2026-05-13",
     "funding_rate": 2.5e-05,
-    "price": 79278.0
+    "price": 79283.0
   },
   {
     "date": "2026-05-14",
     "funding_rate": 4.6e-05,
-    "price": 81052.0
+    "price": 81047.0
   },
   {
     "date": "2026-05-15",
     "funding_rate": -3.1e-05,
-    "price": 79069.0
+    "price": 79075.0
   },
   {
     "date": "2026-05-16",
     "funding_rate": 1.9e-05,
-    "price": 78135.0
+    "price": 78146.0
   },
   {
     "date": "2026-05-17",
     "funding_rate": 4e-05,
-    "price": 77426.0
+    "price": 77461.0
   },
   {
     "date": "2026-05-18",
     "funding_rate": -1e-05,
-    "price": 76952.0
+    "price": 76961.0
   },
   {
     "date": "2026-05-19",
     "funding_rate": 5.5e-05,
-    "price": 76809.0
+    "price": 76762.0
   },
   {
     "date": "2026-05-20",
     "funding_rate": 5.6e-05,
-    "price": 77460.0
+    "price": 77471.0
   },
   {
     "date": "2026-05-21",
     "funding_rate": 2.9e-05,
-    "price": 77546.0
+    "price": 77547.0
   },
   {
     "date": "2026-05-22",
     "funding_rate": 3.9e-05,
-    "price": 75483.0
+    "price": 75500.0
   },
   {
     "date": "2026-05-23",
     "funding_rate": 2.9e-05,
-    "price": 76673.0
+    "price": 76687.0
   },
   {
     "date": "2026-05-24",
     "funding_rate": 6.9e-05,
-    "price": 76988.0
+    "price": 77025.0
   },
   {
     "date": "2026-05-25",
@@ -7327,27 +7327,27 @@
   {
     "date": "2026-05-26",
     "funding_rate": 6.1e-05,
-    "price": 75822.0
+    "price": 75839.0
   },
   {
     "date": "2026-05-27",
     "funding_rate": 6.9e-05,
-    "price": 74353.0
+    "price": 74340.0
   },
   {
     "date": "2026-05-28",
     "funding_rate": 7.7e-05,
-    "price": 73540.0
+    "price": 73652.0
   },
   {
     "date": "2026-05-29",
     "funding_rate": 9.9e-05,
-    "price": 73383.0
+    "price": 73492.0
   },
   {
     "date": "2026-05-30",
     "funding_rate": 4.3e-05,
-    "price": 73751.0
+    "price": 73776.0
   },
   {
     "date": "2026-05-31",
@@ -7357,217 +7357,217 @@
   {
     "date": "2026-06-01",
     "funding_rate": 5.3e-05,
-    "price": 71360.0
+    "price": 71329.0
   },
   {
     "date": "2026-06-02",
     "funding_rate": 9.8e-05,
-    "price": 66650.0
+    "price": 66763.0
   },
   {
     "date": "2026-06-03",
     "funding_rate": 5.7e-05,
-    "price": 64022.0
+    "price": 64039.0
   },
   {
     "date": "2026-06-04",
     "funding_rate": 3e-05,
-    "price": 63796.0
+    "price": 63811.0
   },
   {
     "date": "2026-06-05",
     "funding_rate": 5e-06,
-    "price": 60922.0
+    "price": 60943.0
   },
   {
     "date": "2026-06-06",
     "funding_rate": 1e-06,
-    "price": 60862.0
+    "price": 60856.0
   },
   {
     "date": "2026-06-07",
     "funding_rate": -2.8e-05,
-    "price": 63255.0
+    "price": 63258.0
   },
   {
     "date": "2026-06-08",
     "funding_rate": 3.3e-05,
-    "price": 63078.0
+    "price": 63077.0
   },
   {
     "date": "2026-06-09",
     "funding_rate": -5e-06,
-    "price": 61658.0
+    "price": 61662.0
   },
   {
     "date": "2026-06-10",
     "funding_rate": 2.5e-05,
-    "price": 61493.0
+    "price": 61471.0
   },
   {
     "date": "2026-06-11",
     "funding_rate": -1.3e-05,
-    "price": 63552.0
+    "price": 63555.0
   },
   {
     "date": "2026-06-12",
     "funding_rate": 2e-05,
-    "price": 63538.0
+    "price": 63536.0
   },
   {
     "date": "2026-06-13",
     "funding_rate": 4.4e-05,
-    "price": 64378.0
+    "price": 64414.0
   },
   {
     "date": "2026-06-14",
     "funding_rate": -2.7e-05,
-    "price": 65714.0
+    "price": 65712.0
   },
   {
     "date": "2026-06-15",
     "funding_rate": 1.2e-05,
-    "price": 66301.0
+    "price": 66292.0
   },
   {
     "date": "2026-06-16",
     "funding_rate": 3e-06,
-    "price": 65599.0
+    "price": 65617.0
   },
   {
     "date": "2026-06-17",
     "funding_rate": 3.2e-05,
-    "price": 64423.0
+    "price": 64443.0
   },
   {
     "date": "2026-06-18",
     "funding_rate": 1.4e-05,
-    "price": 62900.0
+    "price": 62903.0
   },
   {
     "date": "2026-06-19",
     "funding_rate": 1.9e-05,
-    "price": 63514.0
+    "price": 63493.0
   },
   {
     "date": "2026-06-20",
     "funding_rate": 4e-05,
-    "price": 64240.0
+    "price": 64253.0
   },
   {
     "date": "2026-06-21",
     "funding_rate": 1e-05,
-    "price": 63232.0
+    "price": 63252.0
   },
   {
     "date": "2026-06-22",
     "funding_rate": 2.9e-05,
-    "price": 63957.0
+    "price": 63951.0
   },
   {
     "date": "2026-06-23",
     "funding_rate": 3.5e-05,
-    "price": 62671.0
+    "price": 62670.0
   },
   {
     "date": "2026-06-24",
     "funding_rate": 1.4e-05,
-    "price": 60909.0
+    "price": 60994.0
   },
   {
     "date": "2026-06-25",
     "funding_rate": -2.5e-05,
-    "price": 59713.0
+    "price": 59719.0
   },
   {
     "date": "2026-06-26",
     "funding_rate": 3.7e-05,
-    "price": 59982.0
+    "price": 60029.0
   },
   {
     "date": "2026-06-27",
     "funding_rate": 4.1e-05,
-    "price": 59943.0
+    "price": 59954.0
   },
   {
     "date": "2026-06-28",
     "funding_rate": 2.3e-05,
-    "price": 59612.0
+    "price": 59498.0
   },
   {
     "date": "2026-06-29",
     "funding_rate": 2.6e-05,
-    "price": 60160.0
+    "price": 60142.0
   },
   {
     "date": "2026-06-30",
     "funding_rate": 7.8e-05,
-    "price": 58551.0
+    "price": 58573.0
   },
   {
     "date": "2026-07-01",
     "funding_rate": 4e-05,
-    "price": 59980.0
+    "price": 59968.0
   },
   {
     "date": "2026-07-02",
     "funding_rate": 0.0001,
-    "price": 61487.0
+    "price": 61495.0
   },
   {
     "date": "2026-07-03",
     "funding_rate": 6.7e-05,
-    "price": 62537.0
+    "price": 62557.0
   },
   {
     "date": "2026-07-04",
     "funding_rate": 7.1e-05,
-    "price": 63094.0
+    "price": 63098.0
   },
   {
     "date": "2026-07-05",
     "funding_rate": 8.3e-05,
-    "price": 63546.0
+    "price": 63569.0
   },
   {
     "date": "2026-07-06",
     "funding_rate": 6.7e-05,
-    "price": 64072.0
+    "price": 63999.0
   },
   {
     "date": "2026-07-07",
     "funding_rate": 0.000104,
-    "price": 63351.0
+    "price": 63299.0
   },
   {
     "date": "2026-07-08",
     "funding_rate": 4.9e-05,
-    "price": 62249.0
+    "price": 62247.0
   },
   {
     "date": "2026-07-09",
     "funding_rate": 7.4e-05,
-    "price": 63221.0
+    "price": 63198.0
   },
   {
     "date": "2026-07-10",
     "funding_rate": 7.3e-05,
-    "price": 64082.0
+    "price": 64121.0
   },
   {
     "date": "2026-07-11",
     "funding_rate": 0.0001,
-    "price": 63893.0
+    "price": 63795.0
   },
   {
     "date": "2026-07-12",
     "funding_rate": 6.4e-05,
-    "price": 63746.0
+    "price": 63747.0
   },
   {
     "date": "2026-07-13",
     "funding_rate": 4.1e-05,
-    "price": 62242.0
+    "price": 62269.0
   },
   {
     "date": "2026-07-14",
@@ -7577,111 +7577,116 @@
   {
     "date": "2026-07-15",
     "funding_rate": 0.000104,
-    "price": 64722.0
+    "price": 64720.0
   },
   {
     "date": "2026-07-16",
     "funding_rate": 5.8e-05,
-    "price": 63789.0
+    "price": 63796.0
   },
   {
     "date": "2026-07-17",
     "funding_rate": 5.9e-05,
-    "price": 63926.0
+    "price": 63899.0
   },
   {
     "date": "2026-07-18",
     "funding_rate": 3.2e-05,
-    "price": 64793.0
+    "price": 64796.0
   },
   {
     "date": "2026-07-19",
     "funding_rate": 1.5e-05,
-    "price": 64680.0
+    "price": 64679.0
   },
   {
     "date": "2026-07-20",
     "funding_rate": 3e-05,
-    "price": 65199.0
+    "price": 65203.0
   },
   {
     "date": "2026-07-21",
     "funding_rate": 4.1e-05,
-    "price": 66507.0
+    "price": 66516.0
   },
   {
     "date": "2026-07-22",
     "funding_rate": 4.1e-05,
-    "price": 66083.0
+    "price": 66073.0
   },
   {
     "date": "2026-07-23",
     "funding_rate": 0.0,
-    "price": 65044.0
+    "price": 65053.0
   },
   {
     "date": "2026-07-24",
     "funding_rate": 2.1e-05,
-    "price": 64093.0
+    "price": 64096.0
   },
   {
     "date": "2026-07-25",
     "funding_rate": 5e-06,
-    "price": 64309.0
+    "price": 64321.0
   },
   {
     "date": "2026-07-26",
     "funding_rate": 2.3e-05,
-    "price": 65330.0
+    "price": 65334.0
   },
   {
     "date": "2026-07-27",
     "funding_rate": 5.8e-05,
-    "price": 63712.0
+    "price": 63701.0
   },
   {
     "date": "2026-07-28",
     "funding_rate": 1.9e-05,
-    "price": 63869.0
+    "price": 63875.0
   },
   {
     "date": "2026-07-29",
     "funding_rate": 8.3e-05,
-    "price": 63901.0
+    "price": 63916.0
   },
   {
     "date": "2026-07-30",
     "funding_rate": 4.8e-05,
-    "price": 64722.0
+    "price": 64734.0
   },
   {
     "date": "2026-07-31",
     "funding_rate": 9.7e-05,
-    "price": 62810.0
+    "price": 62820.0
   },
   {
     "date": "2026-08-01",
     "funding_rate": 3.7e-05,
-    "price": 62756.0
+    "price": 62773.0
   },
   {
     "date": "2026-08-02",
     "funding_rate": 3.1e-05,
-    "price": 63470.0
+    "price": 63501.0
   },
   {
     "date": "2026-08-03",
     "funding_rate": 7.8e-05,
-    "price": 63438.0
+    "price": 63465.0
   },
   {
     "date": "2026-08-04",
     "funding_rate": 3.3e-05,
-    "price": 64056.0
+    "price": 64063.0
   },
   {
     "date": "2026-08-05",
     "funding_rate": 2.3e-05,
-    "price": 64601.0
+    "price": 64603.0
+  },
+  {
+    "date": "2026-08-06",
+    "funding_rate": 1.8e-05,
+    "price": 64261.0
   }
 ]
