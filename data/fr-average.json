@@ -8112,16 +8112,21 @@
   {
     "date": "2026-10-30",
     "funding_rate": 6e-05,
-    "price": 77224.0
+    "price": 77269.0
   },
   {
     "date": "2026-10-31",
     "funding_rate": 0.0001,
-    "price": 77476.0
+    "price": 77529.0
   },
   {
     "date": "2026-11-01",
     "funding_rate": 8.8e-05,
-    "price": 78279.0
+    "price": 78283.0
+  },
+  {
+    "date": "2026-11-02",
+    "funding_rate": 9.6e-05,
+    "price": 76710.0
   }
 ]
